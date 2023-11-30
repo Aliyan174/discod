@@ -179,7 +179,7 @@ class _SignupPageState extends State<SignupPage> {
               labelText,
               style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
-            Text(
+            const Text(
               "*",
               style: TextStyle(color: Colors.red),
             ),
