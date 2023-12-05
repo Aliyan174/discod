@@ -71,7 +71,7 @@ class LoginPage extends StatelessWidget {
                     padding: EdgeInsets.all(20.0),
                     child: ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => ContactPermissionScreen()));
+                        Navigator.of(context).push(MaterialPageRoute(builder: (_) => PermissionRequestPage()));
                       },
 
                       child: Text(

@@ -1,84 +1,130 @@
 import 'package:flutter/material.dart';
+import 'package:discod/DiscodeFrontend.dart';
 
-class ContactPermissionScreen extends StatelessWidget {
+import 'login_screen.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class PermissionRequestPage extends StatelessWidget {
+  const PermissionRequestPage({Key? key});
+
   @override
   Widget build(BuildContext context) {
-    _showPermissionDialog(context); // Show the permission dialog on screen load
-    return Scaffold(
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/background.jpg'), // Replace with your image path
-            fit: BoxFit.cover,
-          ),
+    return MaterialApp(
+      theme: ThemeData.dark().copyWith(
+        scaffoldBackgroundColor: Colors.white,
+      ),
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: PermissionRequestWidget(),
         ),
-        child: Center(), // No content in the body, since the dialog will be shown
       ),
     );
   }
+}
 
-  Future<void> _showPermissionDialog(BuildContext context) async {
-    return showDialog(
-      context: context,
-      barrierDismissible: false, // Prevent dismissing the dialog by tapping outside
-      builder: (BuildContext context) {
-        return AlertDialog(
-          backgroundColor: Colors.white, // Make the dialog transparent
-          content: Container(
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage('assets/background.jpg'), // Replace with your image path
-                fit: BoxFit.cover,
+class PermissionRequestWidget extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Container(
+          width: 375,
+          height: 190,
+          child: Stack(
+            children: [
+              Positioned(
+                left: 0,
+                top: 0,
+                child: Container(
+                  width: 382,
+                  height: 195,
+                  decoration: BoxDecoration(color: const Color(0xFFD9D9D9)),
+                ),
               ),
-            ),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                Padding(
-                  padding: EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Icon(
-                        Icons.contacts,
-                        size: 30.0,
-                        color: Colors.black, // Change icon color as needed
-                      ),
-                      SizedBox(width: 10.0),
-                      Text(
-                        'Allow access to phone contacts?',
-                        style: TextStyle(fontSize: 12.0, color: Colors.black),
-                      ),
-                    ],
+              Positioned(
+                left: 16,
+                top: 37,
+                child: SizedBox(
+                  width: 40,  // Adjust the width for the logo
+                  height: 40, // Adjust the height for the logo
+                child:  IconButton(
+                    icon: Icon(Icons.contact_phone_outlined),
+                    color: Colors.blue,
+                    onPressed: () {
+                      // Implement search functionality
+                    },
+
+                  ), // Replace 'assets/contact_logo.png' with your image asset
+                ),
+              ),
+              Positioned(
+                left: 100, // Adjust the position as needed
+                top: 37,  // Adjust the position as needed
+                child: SizedBox(
+                  width: 343,
+                  height: 81,
+                  child: Text(
+                    'Allow Discod to access your contacts?',
+
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w400,
+                      height: 1.0,
+                    ),
                   ),
                 ),
-
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: <Widget>[
-                    ElevatedButton(
-                      onPressed: () async {
-                        Navigator.of(context).pop();
-
-                      },
-                      child: Text('Allow'),
+              ),
+              Positioned(
+                left: 125,
+                top: 140,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DicodeFrontend()));  // Handle DENY button click
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(const Color(0xFF18988B)),
+                  ),
+                  child: Text(
+                    'DENY',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
                     ),
-                    SizedBox(width: 10.0),
-                    ElevatedButton(
-                      onPressed: () {
-
-                        // Handle the deny action here if needed
-                      },
-                      child: Text('Deny'),
-                    ),
-                    SizedBox(width: 20.0),
-                  ],
+                  ),
                 ),
-              ],
-            ),
+              ),
+              Positioned(
+                left: 216,
+                top: 140,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) => DicodeFrontend()));// Handle ALLOW button click
+                  },
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(const Color(0xFF18988B)),
+                  ),
+                  child: Text(
+                    'ALLOW',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontFamily: 'Inter',
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }
